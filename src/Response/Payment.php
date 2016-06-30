@@ -11,8 +11,7 @@ class Payment extends AbstractData {
     const STATUS_CREATED    = 'created';
     const STATUS_STARTED    = 'started';
     const STATUS_SUBMITTED  = 'submitted';
-    const STATUS_CONFIRMED  = 'confirmed';
-    const STATUS_CAPTURED   = 'captured';
+    const STATUS_SUCCESS    = 'success';
 
     const STATUS_FAILED     = 'failed';
     const STATUS_CANCELLED  = 'cancelled';
@@ -38,25 +37,12 @@ class Payment extends AbstractData {
         return (bool)$this->state->finished;
     }
 
-
-    /**
-     * Is the payment both finished and successful.
-     *
-     * @return bool
-     */
-    public function isSuccessful(){
-
-        return ( $this->isFinished() && ( $this->isConfirmed() || $this->isCaptured() ) );
-
-    }
-
     //---------------------------
 
     public function isCreated(){    return ( $this->state->status === self::STATUS_CREATED ); }
     public function isStarted(){    return ( $this->state->status === self::STATUS_STARTED ); }
     public function isSubmitted(){  return ( $this->state->status === self::STATUS_SUBMITTED ); }
-    public function isConfirmed(){  return ( $this->state->status === self::STATUS_CONFIRMED ); }
-    public function isCaptured(){   return ( $this->state->status === self::STATUS_CAPTURED ); }
+    public function isSuccess(){    return ( $this->state->status === self::STATUS_SUCCESS ); }
 
     public function isFailed(){     return ( $this->state->status === self::STATUS_FAILED ); }
     public function isCancelled(){  return ( $this->state->status === self::STATUS_CANCELLED ); }

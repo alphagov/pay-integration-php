@@ -23,7 +23,7 @@ class Client {
      * @const string Current version of this client.
      * This follows Semantic Versioning (http://semver.org/)
      */
-    const VERSION = '0.3.0';
+    const VERSION = '0.4.0';
 
     /**
      * @const string The API endpoint for Pay production.
@@ -251,9 +251,11 @@ class Client {
         // Only allow the following filter keys.
         $filters = array_intersect_key( $filters, array_flip([
             'reference',
-            'status',
+            'state',
             'from_date',
             'to_date',
+            'page',
+            'display_size',
         ]));
 
         $response = $this->httpGet( self::PATH_PAYMENT_LIST, $filters );

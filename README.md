@@ -124,19 +124,16 @@ The payment is _finished_. i.e. the user can no longer interact with the payment
 $response->isFinished()
 ```
 
-A payment is considered _successful_ if it's state is either _confirmed_ or _captured_.
+The payment is _successful_.
 ```php
-$response->isSuccessful()
+$response->isSuccess()
 ```
-**Note - please see Pay documentation with regards to the difference between _confirmed_ and _captured_. In some cases it will be appropriate to wait for a payment to be _captured_ before processing a user's request.**
 
-All standard Pay states can also be checked via:
+All other standard Pay states can also be checked via:
 ```php
 $response->isCreated()
 $response->isStarted()
 $response->isSubmitted()
-$response->isConfirmed()
-$response->isCaptured()
 $response->isFailed()
 $response->isCancelled()
 $response->isError()
