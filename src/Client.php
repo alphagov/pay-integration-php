@@ -38,6 +38,7 @@ class Client {
     const PATH_PAYMENT_LOOKUP   = '/v1/payments/%s';
     const PATH_PAYMENT_EVENTS   = '/v1/payments/%s/events';
     const PATH_PAYMENT_CANCEL   = '/v1/payments/%s/cancel';
+    const PATH_PAYMENT_REFUND   = '/v1/payments/%s/refunds/%s';
     const PATH_PAYMENT_REFUNDS  = '/v1/payments/%s/refunds';
 
 
@@ -175,7 +176,7 @@ class Client {
      * Lookup an existing payment.
      *
      * Returns a payment Payment Response object.
-     * If the payment was not fount, NULL is returned.
+     * If the payment was not found, NULL is returned.
      *
      * @param $payment string|Response\Payment GOV.UK payment ID or a Payment Response object.
      * @return null|Response\Payment
@@ -236,6 +237,31 @@ class Client {
         //---
 
         return ( $response->getStatusCode() == 200 ) ? Response\Refunds::buildFromResponse($response) : array();
+
+    }
+
+    /**
+     * Return details of a single refund.
+     *
+     * Returns a Refund Response object.
+     * If the refund was not found, NULL is returned.
+     *
+     * @param $payment string|Response\Payment GOV.UK payment ID or a Payment Response object.
+     * @param $refund string|Response\Refund GOV.UK refund ID or a Refund Response object.
+     * @return null|Response\Refund
+     */
+    public function getPaymentRefund( $payment, $refund ){
+
+        $paymentId = ( $payment instanceof Response\Payment ) ? $payment->payment_id : $payment;
+        $refundId  = ( $refund instanceof Response\Refund   ) ? $refund->refund_id   : $refund;
+
+        $path = sprintf( self::PATH_PAYMENT_REFUND, $paymentId, $refundId );
+
+        $response = $this->httpGet( $path );
+
+        //---
+
+        return ( $response->getStatusCode() == 200 ) ? Response\Refund::buildFromResponse($response) : null;
 
     }
 
