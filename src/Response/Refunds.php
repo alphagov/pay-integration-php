@@ -3,7 +3,7 @@ namespace Alphagov\Pay\Response;
 
 use Alphagov\Pay\Exception;
 
-class Events extends AbstractData {
+class Refunds extends AbstractData {
     use IncludeResponseTrait;
 
     /**
@@ -17,17 +17,17 @@ class Events extends AbstractData {
             $this->payment_id = $details['payment_id'];
         }
 
-        if( !isset($details['events']) || !is_array($details['events']) ){
-            throw new Exception\UnexpectedValueException( "Events response missing 'events' key" );
+        if( !isset($details['_embedded']->refunds) || !is_array($details['_embedded']->refunds) ){
+            throw new Exception\UnexpectedValueException( "Refunds response missing '_embedded->refunds' key" );
         }
 
         // Map event details to objects.
-        $events = array_map( function($event){
-            return new Event( (array)$event );
-        }, $details['events'] );
+        $refunds = array_map( function($refund){
+            return new Refund( (array)$refund );
+        }, $details['_embedded']->refunds );
 
 
-        parent::__construct( $events );
+        parent::__construct( $refunds );
 
     }
 
