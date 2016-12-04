@@ -345,6 +345,27 @@ class Client {
             'display_size',
         ]));
 
+        //---
+
+        // We force the use of PHP's DateTime to ensure dates are encoded correctly.
+        foreach( [ 'from_date', 'to_date' ] as $dateField ){
+
+            if( isset($filters[$dateField]) ) {
+
+                // If the date is not a DateTime, then we don't allow it.
+                if ( !($filters[$dateField] instanceof \DateTime) ) {
+                    throw new Exception\InvalidArgumentException("'{$dateField}' must be passed as a PHP DateTime object");
+                }
+
+                // Otherwise convert it to a URL encoded ISO 8601 string.
+                $filters[$dateField] = urlencode($filters[$dateField]->format('c'));
+
+            } // if
+
+        } // foreach
+
+        //---
+
         $response = $this->httpGet( self::PATH_PAYMENT_LIST, $filters );
 
         //---
