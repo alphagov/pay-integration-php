@@ -1,4 +1,4 @@
-# GOV.UK Pay - pay-integration-php [pre-release]
+# GOV.UK Pay - pay-integration-php
 PHP client for the GOV.UK Pay API
 
 #### PSR-7 HTTP

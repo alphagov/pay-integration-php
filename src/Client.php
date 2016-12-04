@@ -23,7 +23,7 @@ class Client {
      * @const string Current version of this client.
      * This follows Semantic Versioning (http://semver.org/)
      */
-    const VERSION = '0.6.0';
+    const VERSION = '1.0.0';
 
     /**
      * @const string The API endpoint for Pay production.
