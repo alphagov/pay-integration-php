@@ -48,7 +48,7 @@ class Client {
     protected $baseUrl;
 
     /**
-     * @var HttpClientInterface PSR-7 compatible HTTP Client
+     * @var ClientInterface PSR-18 compatible HTTP Client
      */
     private $httpClient;
 
@@ -62,7 +62,7 @@ class Client {
      * Instantiates a new GOV.UK Pay client.
      *
      * The client constructor accepts the following options:
-     *  - httpClient: (HttpClientInterface)
+     *  - httpClient: (ClientInterface)
      *      Required.
      *  - apiKey: (string)
      *      Required.
@@ -518,7 +518,7 @@ class Client {
     }
 
     /**
-     * @param HttpClientInterface $client
+     * @param ClientInterface $client
      */
     final protected function setHttpClient( ClientInterface $client ){
 
