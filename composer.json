@@ -13,7 +13,6 @@
   "require": {
     "php": ">=5.5",
     "guzzlehttp/psr7": "^1.0",
-    "psr/http-client": "^1.0",
     "psr/http-message": "^1.0",
     "php-http/httplug": "^2.2"
   },
