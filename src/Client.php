@@ -1,11 +1,11 @@
 <?php
 namespace Alphagov\Pay;
 
-use GuzzleHttp\Psr7\Uri;                 // Concrete PSR-7 URI representation.
-use GuzzleHttp\Psr7\Request;             // Concrete PSR-7 HTTP Request
-use Psr\Http\Message\UriInterface;       // PSR-7 URI Interface
-use Psr\Http\Message\ResponseInterface;  // PSR-7 HTTP Response Interface
-use Psr\Http\Client\ClientInterface;     // Interface for a PSR-7 compatible HTTP Client.
+use GuzzleHttp\Psr7\Uri;                         // Concrete PSR-7 URI representation.
+use GuzzleHttp\Psr7\Request;                     // Concrete PSR-7 HTTP Request
+use Http\Client\HttpClient as ClientInterface;   // Interface for a PSR-18 compatible HTTP Client.
+use Psr\Http\Message\UriInterface;               // PSR-7 URI Interface
+use Psr\Http\Message\ResponseInterface;          // PSR-7 HTTP Response Interface
 
 /**
  * Client for accessing GOV.UK Pay.
@@ -106,14 +106,14 @@ class Client {
         //--------------------------
         // Set HTTP Client
 
-        if( $config['httpClient'] instanceof HttpClientInterface ){
+        if( $config['httpClient'] instanceof ClientInterface ){
 
             $this->setHttpClient( $config['httpClient'] );
 
         } else {
 
             throw new Exception\InvalidArgumentException(
-                "An instance of \Psr\Http\Client must be set under 'httpClient'"
+                "An instance of \Http\Client\HttpClient must be set under 'httpClient'"
             );
 
         }
@@ -504,12 +504,12 @@ class Client {
     // Getters and setters
 
     /**
-     * @return HttpClientInterface
+     * @return ClientInterface
      * @throws Exception\UnexpectedValueException
      */
     final protected function getHttpClient(){
 
-        if( !( $this->httpClient instanceof HttpClientInterface ) ){
+        if( !( $this->httpClient instanceof ClientInterface ) ){
             throw new Exception\UnexpectedValueException('Invalid HttpClient set');
         }
 
@@ -520,7 +520,7 @@ class Client {
     /**
      * @param HttpClientInterface $client
      */
-    final protected function setHttpClient( HttpClientInterface $client ){
+    final protected function setHttpClient( ClientInterface $client ){
 
         $this->httpClient = $client;
 
