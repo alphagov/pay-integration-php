@@ -1,11 +1,11 @@
 <?php
 namespace Alphagov\Pay;
 
-use GuzzleHttp\Psr7\Uri;                            // Concrete PSR-7 URL representation.
-use GuzzleHttp\Psr7\Request;                        // Concrete PSR-7 HTTP Request
-use Psr\Http\Message\UriInterface;                  // PSR-7 URI Interface
-use Psr\Http\Message\ResponseInterface;             // PSR-7 HTTP Response Interface
-use Http\Client\HttpClient as HttpClientInterface;  // Interface for a PSR-7 compatible HTTP Client.
+use GuzzleHttp\Psr7\Uri;                 // Concrete PSR-7 URI representation.
+use GuzzleHttp\Psr7\Request;             // Concrete PSR-7 HTTP Request
+use Psr\Http\Message\UriInterface;       // PSR-7 URI Interface
+use Psr\Http\Message\ResponseInterface;  // PSR-7 HTTP Response Interface
+use Psr\Http\Client\ClientInterface;     // Interface for a PSR-7 compatible HTTP Client.
 
 /**
  * Client for accessing GOV.UK Pay.
@@ -23,7 +23,7 @@ class Client {
      * @const string Current version of this client.
      * This follows Semantic Versioning (http://semver.org/)
      */
-    const VERSION = '1.0.0';
+    const VERSION = '1.1.0';
 
     /**
      * @const string The API endpoint for Pay production.
@@ -113,7 +113,7 @@ class Client {
         } else {
 
             throw new Exception\InvalidArgumentException(
-                "An instance of HttpClientInterface must be set under 'httpClient'"
+                "An instance of \Psr\Http\Client must be set under 'httpClient'"
             );
 
         }
