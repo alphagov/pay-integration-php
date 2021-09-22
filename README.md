@@ -3,7 +3,8 @@ PHP client for the GOV.UK Pay API
 
 #### PSR-7 HTTP
 
-The Pay PHP Client is based on a PSR-7 HTTP model. You therefore need to pick your preferred HTTP Client library to use.
+The Pay PHP Client is based on a PSR-18 HTTP Client model. You therefore need to pick your preferred
+HTTP Client library to use.
 
 We will show examples here using Guzzle v6.
 
@@ -15,10 +16,11 @@ The Pay PHP Client can be installed with [Composer](https://getcomposer.org/). R
 composer require alphagov/pay-integration-php
 ```
 
-You will also need an implementation of the PSD-7 client interface, such as Guzzle v6:
+You will also need an implementation of the PSR-18 client interface, such as Guzzle v6 with the
+[php-http Guzzle 6 adapter](https://docs.php-http.org/en/latest/) (which makes Guzzle PSR-18 compliant):
 
 ```sh
-composer require guzzlehttp/guzzle
+composer require guzzlehttp/guzzle:^6.0 php-http/guzzle6-adapter
 ```
 
 ## Usage
@@ -30,7 +32,7 @@ Create a (Guzzle-based) instance of the Client using:
 ```php
 $client = new \Alphagov\Pay\Client([
     'apiKey' => '{payment API key}',
-    'httpClient' => new \GuzzleHttp\Client()
+    'httpClient' => new \Http\Adapter\Guzzle6\Client()
 ]);
 ```
 
