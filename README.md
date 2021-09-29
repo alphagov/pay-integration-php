@@ -1,6 +1,8 @@
 # GOV.UK Pay - pay-integration-php
 PHP client for the GOV.UK Pay API
 
+> As of September 2021, this repository is no longer actively maintained by the GOV.UK Pay team.
+
 #### PSR-7 HTTP
 
 The Pay PHP Client is based on a PSR-7 HTTP model. You therefore need to pick your preferred HTTP Client library to use.
